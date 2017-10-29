@@ -1,6 +1,8 @@
-Maven Enforcer rule for windows executables
-===========================================
-This simple project adds a custom enforcer rule that can be applied when your maven based build relies on windows executables and you want to make sure that you are using the correct version.
+Maven Concrete Version rule
+===========================
+When releasing a maven based project you should never depend on non-concrete versions.
+The standard rules supplied with maven will enforce non-snapshot BUT will allow version ranges.
+This project defines an enforcer rule that checks for both SNAPSHOT and Range.
 
 Usage
 -----
@@ -8,55 +10,16 @@ In order to use this rule you need to
 * add the **maven-enforcer-plugin**.
 * configure an execution using the rule as part of the **enforce** goal
 
-Rule Configuration:
+Default configuration:
 
-                                <exeVersionRule implementation="com.omrispector.maven.enforce.ExeVersionRule">
-                                    <component>Excel</component>
-                                    <checkOn>C:\Program Files (x86)\Microsoft Office\Office12\excel.exe</checkOn>
-                                    <version>[12.0,12.2)</version>
-                                </exeVersionRule>
+  <concreteVersionRule implementation="com.develeap.enforce.ConcreteVersionRule"/>
 
-**component** - Name of component for user friendly error if rule fails
+Further Configuration
 
-**checkOn** - Full path to DLL or executable to be checked
+* **checkOnSnapshotBuilds** - (default:false) enforce rule even when building a SNAPSHOT of your project
+* **alsoCheckParentVersion** - (default:true) enforce the rule on parent version
+* **allowSnapshotVersions** - (default:false) allow SNAPSHOT version in dependencies and parent
 
-**version** - a version range to be validated
-
-Following is a full example limiting the version of Excel:
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.2</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.omrispector.mvn.enforce</groupId>
-                        <artifactId>exe-version</artifactId>
-                        <version>1.0</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>enforce</id>
-                        <configuration>
-                            <rules>
-                                <exeVersionRule implementation="com.omrispector.maven.enforce.ExeVersionRule">
-                                    <component>Excel</component>
-                                    <checkOn>C:\Program Files (x86)\Microsoft Office\Office12\excel.exe</checkOn>
-                                    <version>[12.0,12.2)</version>
-                                </exeVersionRule>
-                            </rules>
-                        </configuration>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-
-                    </execution>
-                </executions>
-            </plugin>
-
-Version Semantics
------------------
-The version semantics are taken from http://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
+An example of a usage pom can be found at usage-pom.xml
 
 Enjoy.
