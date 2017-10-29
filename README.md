@@ -7,9 +7,8 @@ This project defines an enforcer rule that checks for both SNAPSHOT and Range.
 Usage
 -----
 In order to use this rule you need to 
-
 * add the **maven-enforcer-plugin**.
-* configure an execution using the rule as part of the **enforce** goal
+* configure an execution using the rule as part of the **enforce** goal:
 
 
     <rules>
