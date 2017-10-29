@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+    <!--
+    This is an example of how the concrete version rule can be used.
+    It is also useful for debugging the rule :-)
+
+    To run it "mvn -f usage-pom.xml validate"
+    -->
+
+  <groupId>com.develeap</groupId>
+  <artifactId>concrete-rule-usage-example</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <!--version>[1.2.0,1.2.99)</version-->
+      <!--version>1.2.17-SNAPSHOT</version-->
+      <version>1.2.17</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <dependencies>
+                  <dependency>
+                      <groupId>com.develeap</groupId>
+                      <artifactId>mvn.enforce.concrete-version</artifactId>
+                      <version>1.0-SNAPSHOT</version>
+                  </dependency>
+                </dependencies>
+                <configuration>
+                  <rules>
+                    <concreteVersionRule implementation="com.develeap.enforce.ConcreteVersionRule">
+                      <!--
+                      <checkOnSnapshotBuilds>false</checkOnSnapshotBuilds>
+                      <allowSnapshotVersions>false</allowSnapshotVersions>
+                      <alsoCheckParentVersion>true</alsoCheckParentVersion>
+                      -->
+                    </concreteVersionRule>
+                  </rules>
+                  <fail>true</fail>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>enforce</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
