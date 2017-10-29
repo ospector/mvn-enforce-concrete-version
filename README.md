@@ -10,10 +10,11 @@ In order to use this rule you need to
 * add the **maven-enforcer-plugin**.
 * configure an execution using the rule as part of the **enforce** goal:
 
-
+```
     <rules>
         <concreteVersionRule implementation="com.develeap.enforce.ConcreteVersionRule"/>
     </rules>
+```
 
 Further configuration is possible by setting one of the following flags:
 
