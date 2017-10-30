@@ -11,7 +11,7 @@
   <groupId>com.develeap</groupId>
   <artifactId>mvn.enforce.concrete-version</artifactId>
   <packaging>jar</packaging>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.1</version>
 
   <name>Concrete Version Rule</name>
   <description>Custom maven enforcer plugin rule to limit dependencies to concrete (non range, non snapshot) versions.</description>
